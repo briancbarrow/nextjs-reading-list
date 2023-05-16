@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import "./globals.css";
-
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
@@ -14,7 +15,7 @@ import {
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-
+const queryClient = new QueryClient();
 const navigation = [
   { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
   { name: "All Books", href: "/all-books", icon: UsersIcon, current: false },
@@ -31,6 +32,7 @@ export default function RootLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
   
   return (
+    <QueryClientProvider client={queryClient}>
     <html className="h-full bg-gray-50">
       <body className="h-full">
         <div>
@@ -210,6 +212,7 @@ export default function RootLayout({
           </main>
         </div>
       </body>
-    </html>
+      </html>
+      </QueryClientProvider>
   );
 }

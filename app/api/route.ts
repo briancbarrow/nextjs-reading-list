@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
+  console.log('GET route')
   const res = await fetch(
     `https://api.airtable.com/v0/appV4vhlXofp6BgID/tblQ6ii6JrKorm0jw`,
     {
@@ -12,7 +11,7 @@ export async function GET(request: Request) {
       },
     }
   );
-  const product = await res.json();
-
-  return NextResponse.json({ product });
+  const books = await res.json();
+  console.log("BOOKS", books);
+  return NextResponse.json({ books });
 }
